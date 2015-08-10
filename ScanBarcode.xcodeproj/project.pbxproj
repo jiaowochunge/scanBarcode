@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		FF2E7E7C1B789C5A009F8801 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2E7E7B1B789C5A009F8801 /* main.m */; };
 		FF2E7E7F1B789C5A009F8801 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2E7E7E1B789C5A009F8801 /* AppDelegate.m */; };
-		FF2E7E821B789C5A009F8801 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2E7E811B789C5A009F8801 /* ViewController.m */; };
 		FF2E7E851B789C5A009F8801 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF2E7E831B789C5A009F8801 /* Main.storyboard */; };
 		FF2E7E871B789C5A009F8801 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF2E7E861B789C5A009F8801 /* Images.xcassets */; };
 		FF2E7E8A1B789C5A009F8801 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF2E7E881B789C5A009F8801 /* LaunchScreen.xib */; };
 		FF2E7E961B789C5A009F8801 /* ScanBarcodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2E7E951B789C5A009F8801 /* ScanBarcodeTests.m */; };
+		FF2E7EA11B789D63009F8801 /* ScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2E7EA01B789D63009F8801 /* ScanView.m */; };
+		FF2E7EA41B789D82009F8801 /* ScanQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2E7EA31B789D82009F8801 /* ScanQRCodeViewController.m */; };
+		FF2E7EA61B789DED009F8801 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF2E7EA51B789DED009F8801 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,14 +34,17 @@
 		FF2E7E7B1B789C5A009F8801 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FF2E7E7D1B789C5A009F8801 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FF2E7E7E1B789C5A009F8801 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		FF2E7E801B789C5A009F8801 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		FF2E7E811B789C5A009F8801 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		FF2E7E841B789C5A009F8801 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FF2E7E861B789C5A009F8801 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FF2E7E891B789C5A009F8801 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		FF2E7E8F1B789C5A009F8801 /* ScanBarcodeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScanBarcodeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF2E7E941B789C5A009F8801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF2E7E951B789C5A009F8801 /* ScanBarcodeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanBarcodeTests.m; sourceTree = "<group>"; };
+		FF2E7E9F1B789D63009F8801 /* ScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanView.h; sourceTree = "<group>"; };
+		FF2E7EA01B789D63009F8801 /* ScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanView.m; sourceTree = "<group>"; };
+		FF2E7EA21B789D82009F8801 /* ScanQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanQRCodeViewController.h; sourceTree = "<group>"; };
+		FF2E7EA31B789D82009F8801 /* ScanQRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanQRCodeViewController.m; sourceTree = "<group>"; };
+		FF2E7EA51B789DED009F8801 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF2E7EA61B789DED009F8801 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +69,7 @@
 		FF2E7E6D1B789C5A009F8801 = {
 			isa = PBXGroup;
 			children = (
+				FF2E7EA51B789DED009F8801 /* AVFoundation.framework */,
 				FF2E7E781B789C5A009F8801 /* ScanBarcode */,
 				FF2E7E921B789C5A009F8801 /* ScanBarcodeTests */,
 				FF2E7E771B789C5A009F8801 /* Products */,
@@ -83,8 +90,10 @@
 			children = (
 				FF2E7E7D1B789C5A009F8801 /* AppDelegate.h */,
 				FF2E7E7E1B789C5A009F8801 /* AppDelegate.m */,
-				FF2E7E801B789C5A009F8801 /* ViewController.h */,
-				FF2E7E811B789C5A009F8801 /* ViewController.m */,
+				FF2E7EA21B789D82009F8801 /* ScanQRCodeViewController.h */,
+				FF2E7EA31B789D82009F8801 /* ScanQRCodeViewController.m */,
+				FF2E7E9F1B789D63009F8801 /* ScanView.h */,
+				FF2E7EA01B789D63009F8801 /* ScanView.m */,
 				FF2E7E831B789C5A009F8801 /* Main.storyboard */,
 				FF2E7E861B789C5A009F8801 /* Images.xcassets */,
 				FF2E7E881B789C5A009F8801 /* LaunchScreen.xib */,
@@ -219,7 +228,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF2E7E821B789C5A009F8801 /* ViewController.m in Sources */,
+				FF2E7EA41B789D82009F8801 /* ScanQRCodeViewController.m in Sources */,
+				FF2E7EA11B789D63009F8801 /* ScanView.m in Sources */,
 				FF2E7E7F1B789C5A009F8801 /* AppDelegate.m in Sources */,
 				FF2E7E7C1B789C5A009F8801 /* main.m in Sources */,
 			);
