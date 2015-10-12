@@ -29,10 +29,6 @@ typedef NS_ENUM(NSInteger, PanCorner) {
 @property (nonatomic, assign) CGFloat expandCornerLength;
 // 四周半透明，中间透明的遮罩
 @property (nonatomic, strong) CAShapeLayer *maskLayer;
-// 平移手势起始触摸点
-@property (nonatomic, assign) CGPoint lastTranslation;
-// 缩放手势原始尺寸
-@property (nonatomic, assign) CGRect lastScaleRect;
 // 平移手势种类。平移整个扫描框，还是拖动四角
 @property (nonatomic, assign) PanCorner panType;
 
@@ -57,7 +53,6 @@ typedef NS_ENUM(NSInteger, PanCorner) {
         // 缩放事件
         UIGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(scaleScanRect:)];
         [self addGestureRecognizer:pinchGesture];
-        _lastScaleRect = scanRect;
     }
     return self;
 }
@@ -166,34 +161,33 @@ typedef NS_ENUM(NSInteger, PanCorner) {
     CGPoint translation = [gesture translationInView:self];
     CGRect scanRect;
     if (_panType == PanCornerNot) {
-        scanRect = CGRectOffset(_scanRect, translation.x - _lastTranslation.x, translation.y - _lastTranslation.y);
+        scanRect = CGRectOffset(_scanRect, translation.x, translation.y);
     } else if (_panType == PanCornerLeftTop) {
         scanRect = _scanRect;
-        scanRect.origin.x += translation.x - _lastTranslation.x;
-        scanRect.origin.y += translation.y - _lastTranslation.y;
-        scanRect.size.width -= translation.x - _lastTranslation.x;
-        scanRect.size.height -= translation.y - _lastTranslation.y;
+        scanRect.origin.x += translation.x;
+        scanRect.origin.y += translation.y;
+        scanRect.size.width -= translation.x;
+        scanRect.size.height -= translation.y;
     } else if (_panType == PanCornerLeftBottom) {
         scanRect = _scanRect;
-        scanRect.origin.x += translation.x - _lastTranslation.x;
-        scanRect.size.width -= translation.x - _lastTranslation.x;
-        scanRect.size.height += translation.y - _lastTranslation.y;
+        scanRect.origin.x += translation.x;
+        scanRect.size.width -= translation.x;
+        scanRect.size.height += translation.y;
     } else if (_panType == PanCornerRightTop) {
         scanRect = _scanRect;
-        scanRect.origin.y += translation.y - _lastTranslation.y;
-        scanRect.size.width += translation.x - _lastTranslation.x;
-        scanRect.size.height -= translation.y - _lastTranslation.y;
+        scanRect.origin.y += translation.y;
+        scanRect.size.width += translation.x;
+        scanRect.size.height -= translation.y;
     } else if (_panType == PanCornerRightBottom) {
         scanRect = _scanRect;
-        scanRect.size.width += translation.x - _lastTranslation.x;
-        scanRect.size.height += translation.y - _lastTranslation.y;
+        scanRect.size.width += translation.x;
+        scanRect.size.height += translation.y;
     } else {
         NSAssert(NO, @"shenme gui");
     }
     self.scanRect = scanRect;
-    _lastTranslation = translation;
+    [gesture setTranslation:CGPointZero inView:self];
     if (gesture.state == UIGestureRecognizerStateEnded) {
-        _lastScaleRect = _scanRect;
         if (_endOfChangeScanRect) {
             _endOfChangeScanRect(_scanRect);
         }
@@ -203,7 +197,7 @@ typedef NS_ENUM(NSInteger, PanCorner) {
 - (void)scaleScanRect:(UIPinchGestureRecognizer *)gesture
 {
     CGFloat scale = gesture.scale;
-    CGRect scanRect = _lastScaleRect;
+    CGRect scanRect = self.scanRect;
     CGFloat deltaW = scanRect.size.width * (scale - 1);
     CGFloat deltaH = scanRect.size.height * (scale - 1);
     // 保持中心不变
@@ -212,8 +206,8 @@ typedef NS_ENUM(NSInteger, PanCorner) {
     scanRect.origin.x -= deltaW * 0.5;
     scanRect.origin.y -= deltaH * 0.5;
     self.scanRect = scanRect;
+    gesture.scale = 1;
     if (gesture.state == UIGestureRecognizerStateEnded) {
-        _lastScaleRect = _scanRect;
         if (_endOfChangeScanRect) {
             _endOfChangeScanRect(_scanRect);
         }
@@ -224,7 +218,6 @@ typedef NS_ENUM(NSInteger, PanCorner) {
 {
     if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
         CGPoint touchPoint = [touch locationInView:self];
-        _lastTranslation = touchPoint;
         
         BOOL (^testInCorner)(UIView *testView) = ^(UIView *testView) {
             CGRect testRect = CGRectInset(testView.frame, -_expandCornerLength, -_expandCornerLength);
