@@ -93,14 +93,10 @@ typedef NS_ENUM(NSInteger, PanCorner) {
 
 // 左上角图片
 - (UIImage *)leftTopCornerImage {
-    // 不知道这样做对不对，完全是自臆
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    // push context
-    UIGraphicsPushContext(context);
     // 创建一个新的图形上下文
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(_cornerLength, _cornerLength), NO, [UIScreen mainScreen].scale);
-    context = UIGraphicsGetCurrentContext();
-    CGContextSetRGBStrokeColor(context, 1.0, 0.0, 0.0, 1.0);//设置当前笔头颜色
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);//设置当前笔头颜色
     CGContextSetLineWidth(context, 5.0);//设置当前画笔粗细
     CGContextMoveToPoint(context, _cornerLength, 0.0);//将画笔移到某点
     CGContextAddLineToPoint(context, 0, 0);//设置一个终点
@@ -110,8 +106,6 @@ typedef NS_ENUM(NSInteger, PanCorner) {
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     // 结束图形上下文
     UIGraphicsEndImageContext();
-    // pop context
-    UIGraphicsPopContext();
     return image;
 }
 

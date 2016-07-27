@@ -70,6 +70,10 @@
 }
 
 - (void)queryCodeAction:(id)sender {
+    NSURL *url = [NSURL URLWithString:_scanResultLabel.text];
+    if (url && [[UIApplication sharedApplication] canOpenURL:url]) {
+        [[UIApplication sharedApplication] openURL:url];
+    }
 }
 
 - (UISlider *)presetSlider {
